@@ -1,0 +1,992 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Management System - Technical Documentation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f5f5;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 60px 40px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        nav {
+            background: #2c3e50;
+            padding: 15px 40px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #667eea;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        section {
+            margin-bottom: 60px;
+            page-break-inside: avoid;
+        }
+
+        h2 {
+            color: #667eea;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            font-size: 2em;
+        }
+
+        h3 {
+            color: #764ba2;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+
+        h4 {
+            color: #2c3e50;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        th {
+            background: #667eea;
+            color: white;
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        td {
+            padding: 12px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        tr:hover {
+            background: #f9f9f9;
+        }
+
+        .card {
+            background: #f8f9fa;
+            border-left: 4px solid #667eea;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 5px 10px;
+            background: #667eea;
+            color: white;
+            border-radius: 3px;
+            font-size: 0.9em;
+            margin-right: 10px;
+        }
+
+        .badge.success {
+            background: #28a745;
+        }
+
+        .badge.info {
+            background: #17a2b8;
+        }
+
+        .badge.warning {
+            background: #ffc107;
+            color: #333;
+        }
+
+        code {
+            background: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            color: #e83e8c;
+        }
+
+        pre {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 20px;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+
+        pre code {
+            background: none;
+            color: inherit;
+            padding: 0;
+        }
+
+        ul, ol {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .grid-item {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+        }
+
+        .grid-item h4 {
+            margin-top: 0;
+            color: #667eea;
+        }
+
+        .method {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 3px;
+            font-weight: bold;
+            font-size: 0.85em;
+        }
+
+        .method.get {
+            background: #61affe;
+            color: white;
+        }
+
+        .method.post {
+            background: #49cc90;
+            color: white;
+        }
+
+        .method.put {
+            background: #fca130;
+            color: white;
+        }
+
+        .method.delete {
+            background: #f93e3e;
+            color: white;
+        }
+
+        .architecture {
+            text-align: center;
+            padding: 30px;
+            background: linear-gradient(to bottom, #f8f9fa, #e9ecef);
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .architecture div {
+            background: white;
+            padding: 15px;
+            margin: 10px auto;
+            max-width: 500px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .footer {
+            background: #2c3e50;
+            color: white;
+            padding: 30px 40px;
+            text-align: center;
+        }
+
+        @media print {
+            body {
+                background: white;
+            }
+
+            nav {
+                display: none;
+            }
+
+            section {
+                page-break-after: always;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .content {
+                padding: 20px;
+            }
+
+            header {
+                padding: 40px 20px;
+            }
+
+            header h1 {
+                font-size: 1.8em;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>College Management System</h1>
+            <p>Technical Documentation - Spring Boot REST API with PostgreSQL</p>
+            <div style="margin-top: 20px;">
+                <span class="badge">Spring Boot 4.0.1</span>
+                <span class="badge">Java 17</span>
+                <span class="badge">PostgreSQL</span>
+                <span class="badge">REST API</span>
+            </div>
+        </header>
+
+        <nav>
+            <ul>
+                <li><a href="#overview">Overview</a></li>
+                <li><a href="#tech-stack">Tech Stack</a></li>
+                <li><a href="#architecture">Architecture</a></li>
+                <li><a href="#database">Database</a></li>
+                <li><a href="#entities">Entities</a></li>
+                <li><a href="#api">API Endpoints</a></li>
+                <li><a href="#setup">Setup</a></li>
+            </ul>
+        </nav>
+
+        <div class="content">
+            <!-- Overview Section -->
+            <section id="overview">
+                <h2>Project Overview</h2>
+                <p>A comprehensive RESTful API for managing college operations including students, courses, enrollments, and payments.</p>
+
+                <div class="grid">
+                    <div class="grid-item">
+                        <h4>🎯 Purpose</h4>
+                        <p>Streamline college management with automated workflows and REST APIs</p>
+                    </div>
+                    <div class="grid-item">
+                        <h4>🚀 Key Features</h4>
+                        <p>Complete CRUD operations, automated business rules, Swagger documentation</p>
+                    </div>
+                    <div class="grid-item">
+                        <h4>📊 Status</h4>
+                        <p>Production-ready with validation and error handling</p>
+                    </div>
+                    <div class="grid-item">
+                        <h4>🔗 Access</h4>
+                        <p>Port 8082 with Swagger UI at /swagger-ui</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h4>Application URLs</h4>
+                    <ul>
+                        <li><strong>Base URL:</strong> <code>http://localhost:8082</code></li>
+                        <li><strong>Swagger UI:</strong> <code>http://localhost:8082/swagger-ui</code></li>
+                        <li><strong>OpenAPI Docs:</strong> <code>http://localhost:8082/v3/api-docs</code></li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Technology Stack -->
+            <section id="tech-stack">
+                <h2>Technology Stack</h2>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Component</th>
+                            <th>Technology</th>
+                            <th>Version</th>
+                            <th>Purpose</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Backend Framework</td>
+                            <td>Spring Boot</td>
+                            <td>4.0.1</td>
+                            <td>Core application framework</td>
+                        </tr>
+                        <tr>
+                            <td>Programming Language</td>
+                            <td>Java</td>
+                            <td>17</td>
+                            <td>Primary development language</td>
+                        </tr>
+                        <tr>
+                            <td>Database</td>
+                            <td>PostgreSQL</td>
+                            <td>Latest</td>
+                            <td>Data persistence</td>
+                        </tr>
+                        <tr>
+                            <td>ORM</td>
+                            <td>Spring Data JPA</td>
+                            <td>Included</td>
+                            <td>Object-relational mapping</td>
+                        </tr>
+                        <tr>
+                            <td>Build Tool</td>
+                            <td>Maven</td>
+                            <td>Latest</td>
+                            <td>Dependency management & build</td>
+                        </tr>
+                        <tr>
+                            <td>API Documentation</td>
+                            <td>SpringDoc OpenAPI</td>
+                            <td>2.8.3</td>
+                            <td>Interactive API docs (Swagger)</td>
+                        </tr>
+                        <tr>
+                            <td>Validation</td>
+                            <td>Jakarta Validation</td>
+                            <td>Included</td>
+                            <td>Input validation</td>
+                        </tr>
+                        <tr>
+                            <td>Code Generation</td>
+                            <td>Lombok</td>
+                            <td>Latest</td>
+                            <td>Reduce boilerplate code</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- System Architecture -->
+            <section id="architecture">
+                <h2>System Architecture</h2>
+
+                <h3>Layered Architecture Design</h3>
+
+                <div class="architecture">
+                    <div style="background: #667eea; color: white;"><strong>Controller Layer</strong><br>REST Endpoints & HTTP Handling</div>
+                    <div>↓</div>
+                    <div style="background: #764ba2; color: white;"><strong>Service Layer</strong><br>Business Logic & Transactions</div>
+                    <div>↓</div>
+                    <div style="background: #49cc90; color: white;"><strong>Repository Layer</strong><br>Data Access (JPA)</div>
+                    <div>↓</div>
+                    <div style="background: #2c3e50; color: white;"><strong>PostgreSQL Database</strong><br>Schema: college</div>
+                </div>
+
+                <h3>Design Patterns</h3>
+                <div class="grid">
+                    <div class="grid-item">
+                        <h4>MVC Pattern</h4>
+                        <p>Model-View-Controller with REST endpoints for clean separation</p>
+                    </div>
+                    <div class="grid-item">
+                        <h4>Repository Pattern</h4>
+                        <p>Spring Data JPA repositories for data abstraction</p>
+                    </div>
+                    <div class="grid-item">
+                        <h4>Dependency Injection</h4>
+                        <p>Spring IoC container manages all components</p>
+                    </div>
+                    <div class="grid-item">
+                        <h4>Builder Pattern</h4>
+                        <p>Lombok @Builder for fluent entity creation</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Database Schema -->
+            <section id="database">
+                <h2>Database Schema</h2>
+
+                <div class="card">
+                    <h4>Schema: college (PostgreSQL)</h4>
+                    <p>Database: <code>collegedb</code></p>
+                </div>
+
+                <h3>Tables</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Table</th>
+                            <th>Description</th>
+                            <th>Primary Key</th>
+                            <th>Key Fields</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>student</code></td>
+                            <td>Student information</td>
+                            <td>id</td>
+                            <td>name, address, phone_number</td>
+                        </tr>
+                        <tr>
+                            <td><code>course</code></td>
+                            <td>Course catalog</td>
+                            <td>id</td>
+                            <td>title, code</td>
+                        </tr>
+                        <tr>
+                            <td><code>enrollment</code></td>
+                            <td>Student-Course linkage</td>
+                            <td>id</td>
+                            <td>student_id, course_id, enrollment_date, status</td>
+                        </tr>
+                        <tr>
+                            <td><code>payment</code></td>
+                            <td>Payment records</td>
+                            <td>id</td>
+                            <td>enroll_id, payment_date, amount, status</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>Entity Relationships</h3>
+                <div class="card">
+                    <pre><code>Student (1) ────── (N) Enrollment (N) ────── (1) Course
+                    │
+                    │ (1)
+                    ▼
+                (N) Payment</code></pre>
+                </div>
+            </section>
+
+            <!-- Entities -->
+            <section id="entities">
+                <h2>Entity Details</h2>
+
+                <h3>1. Student Entity</h3>
+                <div class="card">
+                    <p><strong>Table:</strong> <code>college.student</code></p>
+                    <p><strong>Java Class:</strong> <code>com.college.cms.entity.Student</code></p>
+                </div>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Field</th>
+                            <th>Type</th>
+                            <th>Constraints</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>id</td>
+                            <td>Long</td>
+                            <td>Primary Key, Auto-generated</td>
+                            <td>Unique identifier</td>
+                        </tr>
+                        <tr>
+                            <td>name</td>
+                            <td>String</td>
+                            <td>NOT NULL</td>
+                            <td>Student name</td>
+                        </tr>
+                        <tr>
+                            <td>address</td>
+                            <td>String</td>
+                            <td>-</td>
+                            <td>Student address</td>
+                        </tr>
+                        <tr>
+                            <td>phoneNumber</td>
+                            <td>String</td>
+                            <td>NOT NULL</td>
+                            <td>Contact number (supports country codes)</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>2. Course Entity</h3>
+                <div class="card">
+                    <p><strong>Table:</strong> <code>college.course</code></p>
+                    <p><strong>Java Class:</strong> <code>com.college.cms.entity.Course</code></p>
+                </div>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Field</th>
+                            <th>Type</th>
+                            <th>Constraints</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>id</td>
+                            <td>Long</td>
+                            <td>Primary Key, Auto-generated</td>
+                            <td>Unique identifier</td>
+                        </tr>
+                        <tr>
+                            <td>title</td>
+                            <td>String</td>
+                            <td>NOT NULL</td>
+                            <td>Course name (e.g., "Mathematics")</td>
+                        </tr>
+                        <tr>
+                            <td>code</td>
+                            <td>String</td>
+                            <td>NOT NULL</td>
+                            <td>Course code (e.g., "MATH-101")</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>3. Enrollment Entity</h3>
+                <div class="card">
+                    <p><strong>Table:</strong> <code>college.enrollment</code></p>
+                    <p><strong>Java Class:</strong> <code>com.college.cms.entity.Enrollment</code></p>
+                </div>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Field</th>
+                            <th>Type</th>
+                            <th>Constraints</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>id</td>
+                            <td>Long</td>
+                            <td>Primary Key, Auto-generated</td>
+                            <td>Unique identifier</td>
+                        </tr>
+                        <tr>
+                            <td>student</td>
+                            <td>Student</td>
+                            <td>Foreign Key, NOT NULL</td>
+                            <td>Reference to Student entity</td>
+                        </tr>
+                        <tr>
+                            <td>course</td>
+                            <td>Course</td>
+                            <td>Foreign Key, NOT NULL</td>
+                            <td>Reference to Course entity</td>
+                        </tr>
+                        <tr>
+                            <td>enrollmentDate</td>
+                            <td>LocalDate</td>
+                            <td>NOT NULL</td>
+                            <td>Date of enrollment</td>
+                        </tr>
+                        <tr>
+                            <td>enrollmentStatus</td>
+                            <td>Enum</td>
+                            <td>NOT NULL</td>
+                            <td>PENDING, ACTIVE, COMPLETED, CANCELLED</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="card">
+                    <h4>Enrollment Status Workflow</h4>
+                    <ul>
+                        <li><span class="badge warning">PENDING</span> Initial status after enrollment creation</li>
+                        <li><span class="badge success">ACTIVE</span> Set automatically after successful payment</li>
+                        <li><span class="badge info">COMPLETED</span> Course completed</li>
+                        <li><span class="badge">CANCELLED</span> Enrollment cancelled</li>
+                    </ul>
+                </div>
+
+                <h3>4. Payment Entity</h3>
+                <div class="card">
+                    <p><strong>Table:</strong> <code>college.payment</code></p>
+                    <p><strong>Java Class:</strong> <code>com.college.cms.entity.Payment</code></p>
+                </div>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Field</th>
+                            <th>Type</th>
+                            <th>Constraints</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>id</td>
+                            <td>Long</td>
+                            <td>Primary Key, Auto-generated</td>
+                            <td>Unique identifier</td>
+                        </tr>
+                        <tr>
+                            <td>enrollment</td>
+                            <td>Enrollment</td>
+                            <td>Foreign Key, NOT NULL</td>
+                            <td>Reference to Enrollment</td>
+                        </tr>
+                        <tr>
+                            <td>studentPhoneNumber</td>
+                            <td>String</td>
+                            <td>-</td>
+                            <td>Cached for search/compatibility</td>
+                        </tr>
+                        <tr>
+                            <td>paymentDate</td>
+                            <td>LocalDate</td>
+                            <td>-</td>
+                            <td>Date of payment</td>
+                        </tr>
+                        <tr>
+                            <td>paymentStatus</td>
+                            <td>Enum</td>
+                            <td>NOT NULL</td>
+                            <td>PENDING, SUCCESS, FAILED</td>
+                        </tr>
+                        <tr>
+                            <td>amount</td>
+                            <td>Double</td>
+                            <td>NOT NULL</td>
+                            <td>Payment amount</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- API Endpoints -->
+            <section id="api">
+                <h2>API Endpoints</h2>
+
+                <h3>Student API</h3>
+                <div class="card">
+                    <p><strong>Base Path:</strong> <code>/students</code></p>
+                </div>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Method</th>
+                            <th>Endpoint</th>
+                            <th>Description</th>
+                            <th>Response</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="method get">GET</span></td>
+                            <td><code>/students</code></td>
+                            <td>List all students</td>
+                            <td>200 OK</td>
+                        </tr>
+                        <tr>
+                            <td><span class="method get">GET</span></td>
+                            <td><code>/students/{id}</code></td>
+                            <td>Get student by ID</td>
+                            <td>200 OK</td>
+                        </tr>
+                        <tr>
+                            <td><span class="method get">GET</span></td>
+                            <td><code>/students/by-phone</code></td>
+                            <td>Get by phone number</td>
+                            <td>200 OK</td>
+                        </tr>
+                        <tr>
+                            <td><span class="method post">POST</span></td>
+                            <td><code>/students</code></td>
+                            <td>Create new student</td>
+                            <td>201 Created</td>
+                        </tr>
+                        <tr>
+                            <td><span class="method put">PUT</span></td>
+                            <td><code>/students/{id}</code></td>
+                            <td>Update student</td>
+                            <td>200 OK</td>
+                        </tr>
+                        <tr>
+                            <td><span class="method delete">DELETE</span></td>
+                            <td><code>/students/{id}</code></td>
+                            <td>Delete student</td>
+                            <td>204 No Content</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>Course API</h3>
+                <div class="card">
+                    <p><strong>Base Path:</strong> <code>/courses</code></p>
+                </div>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Method</th>
+                            <th>Endpoint</th>
+                            <th>Description</th>
+                            <th>Response</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="method get">GET</span></td>
+                            <td><code>/courses</code></td>
+                            <td>List all courses</td>
+                            <td>200 OK</td>
+                        </tr>
+                        <tr>
+                            <td><span class="method get">GET</span></td>
+                            <td><code>/courses/{id}</code></td>
+                            <td>Get course by ID</td>
+                            <td>200 OK</td>
+                        </tr>
+                        <tr>
+                            <td><span class="method post">POST</span></td>
+                            <td><code>/courses</code></td>
+                            <td>Create new course</td>
+                            <td>201 Created</td>
+                        </tr>
+                        <tr>
+                            <td><span class="method put">PUT</span></td>
+                            <td><code>/courses/{id}</code></td>
+                            <td>Update course</td>
+                            <td>200 OK</td>
+                        </tr>
+                        <tr>
+                            <td><span class="method delete">DELETE</span></td>
+                            <td><code>/courses/{id}</code></td>
+                            <td>Delete course</td>
+                            <td>204 No Content</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>Enrollment API</h3>
+                <div class="card">
+                    <p><strong>Base Path:</strong> <code>/enrollments</code></p>
+                </div>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Method</th>
+                            <th>Endpoint</th>
+                            <th>Description</th>
+                            <th>Response</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="method get">GET</span></td>
+                            <td><code>/enrollments</code></td>
+                            <td>List all enrollments</td>
+                            <td>200 OK</td>
+                        </tr>
+                        <tr>
+                            <td><span class="method get">GET</span></td>
+                            <td><code>/enrollments/{id}</code></td>
+                            <td>Get enrollment by ID</td>
+                            <td>200 OK</td>
+                        </tr>
+                        <tr>
+                            <td><span class="method post">POST</span></td>
+                            <td><code>/enrollments</code></td>
+                            <td>Create enrollment</td>
+                            <td>201 Created</td>
+                        </tr>
+                        <tr>
+                            <td><span class="method put">PUT</span></td>
+                            <td><code>/enrollments/{id}</code></td>
+                            <td>Update enrollment</td>
+                            <td>200 OK</td>
+                        </tr>
+                        <tr>
+                            <td><span class="method delete">DELETE</span></td>
+                            <td><code>/enrollments/{id}</code></td>
+                            <td>Delete enrollment</td>
+                            <td>204 No Content</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>Payment API</h3>
+                <div class="card">
+                    <p><strong>Base Path:</strong> <code>/payments</code></p>
+                </div>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Method</th>
+                            <th>Endpoint</th>
+                            <th>Description</th>
+                            <th>Response</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="method get">GET</span></td>
+                            <td><code>/payments</code></td>
+                            <td>List all payments</td>
+                            <td>200 OK</td>
+                        </tr>
+                        <tr>
+                            <td><span class="method get">GET</span></td>
+                            <td><code>/payments/{id}</code></td>
+                            <td>Get payment by ID</td>
+                            <td>200 OK</td>
+                        </tr>
+                        <tr>
+                            <td><span class="method post">POST</span></td>
+                            <td><code>/payments</code></td>
+                            <td>Create payment</td>
+                            <td>201 Created</td>
+                        </tr>
+                        <tr>
+                            <td><span class="method put">PUT</span></td>
+                            <td><code>/payments/{id}</code></td>
+                            <td>Update payment</td>
+                            <td>200 OK</td>
+                        </tr>
+                        <tr>
+                            <td><span class="method delete">DELETE</span></td>
+                            <td><code>/payments/{id}</code></td>
+                            <td>Delete payment</td>
+                            <td>204 No Content</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- Setup & Configuration -->
+            <section id="setup">
+                <h2>Setup & Configuration</h2>
+
+                <h3>Prerequisites</h3>
+                <ul>
+                    <li>Java 17 or higher</li>
+                    <li>Maven 3.6+</li>
+                    <li>PostgreSQL (any recent version)</li>
+                </ul>
+
+                <h3>Database Setup</h3>
+                <div class="card">
+                    <h4>Step 1: Create Database</h4>
+                    <p>Using psql:</p>
+                    <pre><code>psql -h localhost -p 5432 -U postgres -d postgres -c "CREATE DATABASE collegedb;"</code></pre>
+                </div>
+
+                <div class="card">
+                    <h4>Step 2: Configure Credentials</h4>
+                    <p>Default configuration in <code>application.yml</code>:</p>
+                    <ul>
+                        <li>URL: <code>jdbc:postgresql://localhost:5432/collegedb</code></li>
+                        <li>Username: <code>postgres</code></li>
+                        <li>Password: <code>postgres</code></li>
+                    </ul>
+                </div>
+
+                <h3>Running the Application</h3>
+                <div class="card">
+                    <pre><code>mvn spring-boot:run</code></pre>
+                    <p>Application starts on <strong>http://localhost:8082</strong></p>
+                </div>
+
+                <h3>Accessing Documentation</h3>
+                <div class="grid">
+                    <div class="grid-item">
+                        <h4>Swagger UI</h4>
+                        <p><code>http://localhost:8082/swagger-ui</code></p>
+                        <p>Interactive API testing</p>
+                    </div>
+                    <div class="grid-item">
+                        <h4>OpenAPI Spec</h4>
+                        <p><code>http://localhost:8082/v3/api-docs</code></p>
+                        <p>Raw JSON specification</p>
+                    </div>
+                </div>
+
+                <h3>Project Structure</h3>
+                <div class="card">
+                    <pre><code>college-poc/
+├── src/main/java/com/college/cms/
+│   ├── CollegeManagementApplication.java
+│   ├── config/         (Swagger configuration)
+│   ├── controller/     (REST endpoints)
+│   ├── service/        (Business logic)
+│   ├── repo/           (Data access)
+│   └── entity/         (JPA entities)
+├── src/main/resources/
+│   ├── application.yml
+│   └── db/migration/   (Flyway SQL scripts)
+└── pom.xml</code></pre>
+                </div>
+            </section>
+        </div>
+
+        <footer class="footer">
+            <p><strong>College Management System</strong></p>
+            <p>Technical Documentation • Version 1.0 • March 2026</p>
+            <p>Built with Spring Boot 4.0.1 • Java 17 • PostgreSQL</p>
+        </footer>
+    </div>
+
+    <script>
+        // Print to PDF hint
+        console.log('To convert to PDF/PPT: Press Ctrl+P (or Cmd+P on Mac) and select "Save as PDF"');
+    </script>
+</body>
+</html>
