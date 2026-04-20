@@ -1,0 +1,29 @@
+name: AI Code Review (Copilot)
+
+on:
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - reopened
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  copilot-review:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Run Copilot Review
+        uses: github/copilot-review-action@v1
+        with:
+          review_level: full
+          prompt: |
+            Perform a senior-level code review.
+            Identify bugs, security issues, performance problems,
+            backward compatibility risks, and API contract violations.
