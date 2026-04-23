@@ -176,7 +176,7 @@ public class Course {
 **Java Class**: `com.college.cms.entity.Enrollment`
 
 **Enrollment Status Enum**:
-- `PENDING` - Initial status after enrollment creation
+- `PENDING` - Initial status after enrollment  creation
 - `ACTIVE` - Set automatically after successful payment
 - `COMPLETED` - Course completed
 - `CANCELLED` - Enrollment cancelled
