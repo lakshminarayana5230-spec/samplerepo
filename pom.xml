@@ -12,7 +12,7 @@
     <artifactId>college-poc</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>college-poc</name>
-    <description>college-poc</description>
+    <description>college-poc-test</description>
     <properties>
         <java.version>17</java.version>
         <!-- Spring Boot 4 works with Spring Framework 7; use springdoc 2.8+ -->
