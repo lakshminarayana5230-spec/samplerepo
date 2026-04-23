@@ -6,6 +6,9 @@ on:
       - opened
       - synchronize
       - reopened
+  push:
+    branches:
+      - main
 
 permissions:
   contents: read
@@ -26,4 +29,3 @@ jobs:
           prompt: |
             Perform a senior-level code review.
             Identify bugs, security issues, performance problems,
-            backward compatibility risks, and API contract violations.
