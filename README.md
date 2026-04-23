@@ -50,7 +50,7 @@ On application startup, Flyway will:
 mvn spring-boot:run
 ```
 
-App runs on:
+Application runs on:
 - http://localhost:8082
 
 Swagger UI:
